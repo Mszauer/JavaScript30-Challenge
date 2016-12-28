@@ -64,30 +64,16 @@
 
       transform-origin:100%;/* moves pivot point to end of x axis*/
       transform: rotate(90deg);
-      transition: all 0.1s;
       transition-timing-function: cubic-bezier(0, 0.99, 1, 1.49);
     }
 
   </style>
 
   <script>
-  /* create updated version that shows the current date as well for 2.0 */
+  /* create updated version that shows the current date as well for 2.0  complete with tick-tock sounds*/
   const secondHand= document.querySelector('.second-hand');
   const minHand = document.querySelector('.min-hand');
   const hourHand = document.querySelector('.hour-hand');
-
-   function removeTransition(e){
-    //console.log(e);
-    if (e.propertyName !== 'transition') return;//skip if it's not a transform
-    //console.log(e.propertyName);
-    this.style.transition: all 0;
-  }
-   function addTransition(e){
-    //console.log(e);
-    if (e.propertyName !== 'transition') return;//skip if it's not a transform
-    //console.log(e.propertyName);
-    this.style.transition: all .1s;
-  }
 
   function setDate(){
     const now = new Date();
@@ -95,11 +81,6 @@
     const seconds = now.getSeconds();
     const secondsDegrees = ((seconds/60)*360)+90;//turn into base 10, and adjust for offset
     secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-    /*if (seconds > 59){
-      removeTransition(secondHand);
-    } my attempt at trying to smooth out animation, need to remove then re-add if it doesn't contain it*/ 
-
-    //console.log(`Seconds :"${seconds}"`);
 
     const minutes=now.getMinutes();
     const minDegrees = ((minutes/60)*360)+90;
@@ -109,7 +90,7 @@
     const hours = now.getHours();
     const hourDegrees = ((hours/60)*360)+90;
     hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-    console.log(`Hours: "${hours}"`);
+    console.log(`Hours: "${hours}" Minutes :"${minutes}" Seconds :"${seconds}"`);
   }
 
 
